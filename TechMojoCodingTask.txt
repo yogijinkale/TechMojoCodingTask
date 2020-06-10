@@ -1,0 +1,73 @@
+package com.test;
+
+
+import java.util.Map.Entry;
+import java.util.*;
+
+public class Three implements Cloneable{
+
+	public static void main(String[] args) throws CloneNotSupportedException {
+		
+		String s;
+		Scanner in = new Scanner(System.in);
+		s = in.nextLine();
+		
+		Map<String,Integer> m=new HashMap<String,Integer>();
+		
+		String[] s1=s.split(" ");
+		for(int i=0;i<s1.length;i++)
+		{
+			if(s1[i].charAt(0)=='#')
+			{
+				 if(m.containsKey(s1[i]))
+		            {
+		                m.put(s1[i],m.get(s1[i])+1);
+		            }
+		            else
+		            {
+		                m.put(s1[i],1);
+		            }
+			}
+			
+		}
+		
+		HashMap<String, Integer> m2=sortByValue((HashMap<String, Integer>) m);
+		
+	Iterator itr=m2.entrySet().iterator();
+	 
+	int a=0;
+	while(itr.hasNext())
+	{
+		Map.Entry m3=(Entry) itr.next();
+		System.out.println(m3.getKey());
+		a++;
+		
+		if(a>9)
+		{
+			break;
+		}
+	}
+	
+	}
+	
+	
+	public static HashMap<String, Integer> sortByValue(HashMap<String, Integer> hm) 
+    { 
+        List<Map.Entry<String, Integer> > list = 
+               new LinkedList<Map.Entry<String, Integer> >(hm.entrySet()); 
+  
+        Collections.sort(list, new Comparator<Map.Entry<String, Integer> >() { 
+            public int compare(Map.Entry<String, Integer> o1,  
+                               Map.Entry<String, Integer> o2) 
+            { 
+                return (o2.getValue()).compareTo(o1.getValue()); 
+            } 
+        }); 
+                  HashMap<String, Integer> temp = new LinkedHashMap<String, Integer>(); 
+        for (Map.Entry<String, Integer> aa : list) { 
+            temp.put(aa.getKey(), aa.getValue()); 
+        } 
+        return temp; 
+    } 
+  
+	}
